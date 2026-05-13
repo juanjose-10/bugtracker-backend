@@ -3,12 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    private jwtService: JwtService,
   ) {}
 
   async create(data: any) {
@@ -44,6 +46,17 @@ export class UsersService {
       return { message: 'Contraseña incorrecta' };
     }
 
-    return { message: 'Login correcto', user };
+    const payload = {
+  sub: user.id,
+  email: user.email,
+  rol: user.rol,
+};
+
+const token = this.jwtService.sign(payload);
+
+return {
+  message: 'Login correcto',
+  access_token: token,
+};
   }
 }
