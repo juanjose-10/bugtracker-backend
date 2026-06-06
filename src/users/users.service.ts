@@ -1,5 +1,4 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable, UnauthorizedException } from '@nestjs/common';import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import * as bcrypt from 'bcrypt';
@@ -34,8 +33,8 @@ export class UsersService {
     });
 
     if (!user) {
-      return { message: 'Usuario no encontrado' };
-    }
+  throw new UnauthorizedException('Usuario no encontrado');
+  }
 
     const passwordMatch = await bcrypt.compare(
       data.password,
@@ -43,8 +42,8 @@ export class UsersService {
     );
 
     if (!passwordMatch) {
-      return { message: 'Contraseña incorrecta' };
-    }
+  throw new UnauthorizedException('Contraseña incorrecta');
+  }
 
     const payload = {
   sub: user.id,

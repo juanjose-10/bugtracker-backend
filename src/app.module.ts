@@ -1,7 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
-import { JwtStrategy } from './auth/jwt.strategy/jwt.strategy';@Module({
+import { TicketsModule } from './tickets/tickets.module';
+import { JwtStrategy } from './auth/jwt.strategy/jwt.strategy';
+
+@Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -14,6 +17,7 @@ import { JwtStrategy } from './auth/jwt.strategy/jwt.strategy';@Module({
       synchronize: true,
     }),
     UsersModule,
+    TicketsModule,
   ],
   providers: [JwtStrategy],
 })
