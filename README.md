@@ -25,7 +25,9 @@ QA reporta errores
 Administradores gestionan tickets
 Desarrolladores corrigen incidencias
 Cada rol tiene permisos específicos
+
 🛠️ Tecnologías utilizadas
+
 Backend
 NestJS
 TypeScript
@@ -39,3 +41,48 @@ TypeScript
 Angular Router
 HttpClient
 CSS
+
+📂 Arquitectura del proyecto
+
+Backend/
+├── src/
+│   ├── users/
+│   ├── tickets/
+│   ├── auth/
+│   └── main.ts
+
+Frontend/
+├── src/
+│   ├── app/
+│   │   ├── pages/
+│   │   │   ├── login/
+│   │   │   ├── register/
+│   │   │   └── tickets/
+
+🔐 Roles del sistema
+
+👨‍💼 Administrador
+Puede:
+
+Ver todos los tickets
+Crear tickets
+Asignar tickets
+Gestionar usuarios
+Cambiar estados
+
+🧪 QA
+Puede:
+
+Reportar errores
+Crear tickets
+Asignar tickets a desarrolladores
+Validar correcciones
+
+👨‍💻 Desarrollador
+Puede:
+
+Ver únicamente tickets asignados
+Cambiar estados técnicos:
+Abierto
+En proceso
+Corregido
