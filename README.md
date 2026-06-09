@@ -1,32 +1,31 @@
-🚀 Bug Tracker System
+🚀 Bug Tracker API
 
-Sistema de gestión de errores inspirado en herramientas como Jira y Trello, desarrollado con NestJS, PostgreSQL y Angular.
-Permite registrar incidencias, asignarlas a desarrolladores y gestionar el flujo de corrección de errores mediante roles.
+Backend de un sistema de gestión de incidencias inspirado en herramientas como Jira y Trello, desarrollado con NestJS, PostgreSQL y TypeORM.
 
-📌 Descripción del proyecto
+El sistema permite registrar usuarios, autenticar sesiones mediante JWT, gestionar tickets de errores y controlar permisos según roles dentro de un equipo de desarrollo de software.
 
-Este proyecto fue desarrollado como práctica de arquitectura full stack moderna utilizando:
+📋 Descripción del Proyecto
 
-Backend modular con NestJS
-Base de datos PostgreSQL
-Frontend en Angular Standalone Components
-Autenticación con JWT
-Gestión de roles
-CRUD de tickets
-Flujo de trabajo estilo Jira
+Bug Tracker API simula el flujo de trabajo utilizado en equipos ágiles de desarrollo donde:
 
-El sistema permite que usuarios con rol QA o Administrador registren errores y los asignen a desarrolladores para su corrección.
+Los usuarios QA reportan errores.
+Los Administradores supervisan y asignan tareas.
+Los Desarrolladores corrigen incidencias asignadas.
 
-🧠 Objetivo
+La aplicación implementa autenticación, autorización basada en roles y gestión centralizada de tickets.
 
-Simular un entorno real de trabajo en equipos de desarrollo de software donde:
+🎯 Objetivo
 
-QA reporta errores
-Administradores gestionan tickets
-Desarrolladores corrigen incidencias
-Cada rol tiene permisos específicos
+Construir una aplicación backend moderna utilizando buenas prácticas de desarrollo empresarial:
 
-🛠️ Tecnologías utilizadas
+Arquitectura modular.
+Autenticación JWT.
+Autorización basada en roles.
+API REST.
+Persistencia de datos con PostgreSQL.
+Separación de responsabilidades mediante servicios y controladores.
+
+🛠️ Tecnologías Utilizadas
 
 Backend
 NestJS
@@ -35,54 +34,83 @@ TypeORM
 PostgreSQL
 JWT Authentication
 bcrypt
-Frontend
-Angular 20
-TypeScript
-Angular Router
-HttpClient
-CSS
+Seguridad
+Password Hashing con bcrypt
+JSON Web Tokens (JWT)
+Guards para autorización
+Roles de usuario
 
-📂 Arquitectura del proyecto
-
-Backend/
-├── src/
-│   ├── users/
-│   ├── tickets/
-│   ├── auth/
-│   └── main.ts
-
-Frontend/
-├── src/
-│   ├── app/
-│   │   ├── pages/
-│   │   │   ├── login/
-│   │   │   ├── register/
-│   │   │   └── tickets/
-
-🔐 Roles del sistema
+🔐 Roles del Sistema
 
 👨‍💼 Administrador
-Puede:
 
-Ver todos los tickets
-Crear tickets
-Asignar tickets
-Gestionar usuarios
-Cambiar estados
+Puede:
+Gestionar usuarios.
+Visualizar todos los tickets.
+Crear tickets.
+Asignar tickets.
+Supervisar el flujo de trabajo.
 
 🧪 QA
-Puede:
 
-Reportar errores
-Crear tickets
-Asignar tickets a desarrolladores
-Validar correcciones
+Puede:
+Reportar errores.
+Crear tickets.
+Asignar incidencias.
+Validar correcciones.
 
 👨‍💻 Desarrollador
-Puede:
 
-Ver únicamente tickets asignados
-Cambiar estados técnicos:
-Abierto
-En proceso
-Corregido
+Puede:
+Consultar tickets asignados.
+Actualizar estados de corrección.
+Gestionar incidencias asignadas.
+
+📊 Modelo de Datos
+Usuario
+{
+  "id": 1,
+  "nombre": "Juan Jose",
+  "email": "juan@test.com",
+  "password": "hashedPassword",
+  "rol": "Developer"
+}
+Ticket
+{
+  "id": 1,
+  "titulo": "Error en Login",
+  "descripcion": "No valida credenciales",
+  "prioridad": "Alta",
+  "estado": "Abierto",
+  "usuario": "juan@test.com"
+}
+
+🔑 Endpoints Principales
+
+Usuarios
+Registrar Usuario
+
+POST
+/users/register
+Iniciar Sesión
+
+POST
+/users/login
+Consultar Usuarios
+
+GET
+/users
+Tickets
+Crear Ticket
+
+POST
+/tickets
+Consultar Tickets
+
+GET
+/tickets
+Actualizar Estado
+
+PATCH
+
+/tickets/:id
